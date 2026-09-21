@@ -7,8 +7,12 @@ from werkzeug.security import generate_password_hash, check_password_hash
 app=Flask(__name__, template_folder=".", static_folder=".", static_url_path="/static")
 app.secret_key=os.environ.get("SECRET_KEY","ALTERE-ANTES-DE-PUBLICAR")
 DATABASE_URL=os.environ.get("DATABASE_URL","sqlite:///sema_v93.db")
+# Render fornece URLs PostgreSQL como postgresql://... (ou postgres://...).
+# O projeto usa psycopg 3, então informamos explicitamente o driver ao SQLAlchemy.
 if DATABASE_URL.startswith("postgres://"):
-    DATABASE_URL="postgresql://"+DATABASE_URL[len("postgres://"):]
+    DATABASE_URL="postgresql+psycopg://"+DATABASE_URL[len("postgres://"):]
+elif DATABASE_URL.startswith("postgresql://"):
+    DATABASE_URL="postgresql+psycopg://"+DATABASE_URL[len("postgresql://"):]
 engine=create_engine(DATABASE_URL, pool_pre_ping=True)
 
 class ResultWrap:
@@ -159,7 +163,7 @@ def logout():
     session.clear(); return redirect(url_for("login"))
 
 @app.route("/health")
-def health(): return {"status":"ok","version":"9.2"}
+def health(): return {"status":"ok","version":"9.3.1"}
 
 if __name__=="__main__":
     app.run(host="0.0.0.0",port=int(os.environ.get("PORT","5000")),debug=False)

@@ -4,7 +4,7 @@ from sqlalchemy import create_engine, text
 from sqlalchemy.exc import IntegrityError
 from werkzeug.security import generate_password_hash, check_password_hash
 
-app=Flask(__name__)
+app=Flask(__name__, template_folder=".", static_folder=".", static_url_path="/static")
 app.secret_key=os.environ.get("SECRET_KEY","ALTERE-ANTES-DE-PUBLICAR")
 DATABASE_URL=os.environ.get("DATABASE_URL","sqlite:///sema_v93.db")
 if DATABASE_URL.startswith("postgres://"):

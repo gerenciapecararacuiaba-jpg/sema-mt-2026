@@ -1,4 +1,4 @@
 <!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SEMA-MT V9.2</title><link rel="stylesheet" href="/static/style.css"></head><body><header><div class="head"><b>🌿 SEMA-MT 2026 • V9.2</b>
+<title>SEMA-MT V9.3</title><link rel="stylesheet" href="/static/style.css"></head><body><header><div class="head"><b>🌿 SEMA-MT 2026 • V9.3</b>
 {% if session.uid %}<nav><a href="/painel">Painel</a><a href="/questoes">Questões</a><a href="/erros">Erros</a>{% if session.perfil=="admin" %}<a href="/admin">Admin</a>{% endif %}<a href="/logout">Sair</a></nav>{% endif %}
 </div></header><main class="wrap">{% with ms=get_flashed_messages() %}{% for m in ms %}<div class="card notice">{{m}}</div>{% endfor %}{% endwith %}{% block c %}{% endblock %}</main></body></html>
